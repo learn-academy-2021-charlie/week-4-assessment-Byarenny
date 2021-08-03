@@ -23,10 +23,31 @@ var colors1 = ["purple", "blue", "green", "yellow", "pink"]
 var colors2 = ["chartreuse", "indigo", "periwinkle", "ochre", "aquamarine", "saffron"]
 // Expected output example (can be a different order): ["saffron", "aquamarine", "periwinkle", "indigo", "ochre"]
 
+//TEST:
+    //describes "shuffleArray"
+    //it returns an array with its first index removed and rest of the content shuffled
+    //expect colors1 .toContain -->  "yellow", "blue", "pink", "green"
+    //expect colors2 .toContain -->  "saffron", "aquamarine", "periwinkle", "indigo", "ochre"
 
-
+describe("shuffleArray", () => {
+    it("returns an array with its first index removed and rest of the content shuffled", () => {
+    expect(shuffleArray(colors1)).toContain("yellow", "blue", "pink", "green")
+    expect(shuffleArray(colors2)).toContain("saffron", "aquamarine", "periwinkle", "indigo", "ochre")
+    })
+})
 // b) Create the function that makes the test pass.
+//PROCESS: 
+    //Declare a function- shuffleArray
+    //Parameter- array
+    //Declare a new variable - newArray, with mutator method .slice()
+    //Return newArray with mutator methods .sort().reverse()
+    //Inputs & outputs: ["purple", "blue", "green", "yellow", "pink"] --> ["yellow", "pink", "green", "blue"]
+    //      ["chartreuse", "indigo", "periwinkle", "ochre", "aquamarine", "saffron"]--> ["saffron", "periwinkle", "ochre", "indigo", "aquamarine"]
 
+    const shuffleArray = (array) => {
+        let newArray = array.slice(1,array.length)    
+        return newArray.sort().reverse()
+     }
 
 
 // --------------------2) Create a function that takes an array of numbers and returns an array of the minimum and maximum numbers in that order.
@@ -35,13 +56,35 @@ var colors2 = ["chartreuse", "indigo", "periwinkle", "ochre", "aquamarine", "saf
 
 var nums1 = [3, 56, 90, -8, 0, 23, 6]
 // Expected output: [-8, 90]
-var nums2 = [109, 5, 9, 67 8, 24]
+var nums2 = [109, 5, 9, 67, 8, 24]
 // Expected output: [5, 109]
 
+//TEST:
+    //describes "minMaxNum"
+    //it returns an array of the minimum and maximum numbers sorted least to greatest
+    //expect nums1 --> [-8, 90]
+    //expect nums2 --> [5, 109]
 
+describe("minMaxNum", () => {
+    it("returns an array of the minimum and maximum numbers sorted least to greatest", () => {
+    expect(minMaxNum(nums1)).toEqual([-8, 90])
+    expect(minMaxNum(nums2)).toEqual([5, 109])
+    })
+})
 
 // b) Create the function that makes the test pass.
+//PROCESS:
+    //Declare a function - minMaxNum
+    //Parameter - array
+    //Use .sort() to sort numbers least to greatest and assign it to a new variable - newNumArray
+    //return newNumArray at the index of [0] to access first index in the array and newNumArray at the index of [newNumArray.length -1] to access last index in the array
+    //Inputs & outputs: [3, 56, 90, -8, 0, 23, 6] --> [-8, 90]
+    //                  [109, 5, 9, 67, 8, 24] --> [5, 109]
 
+    const minMaxNum = (array) => {
+        let newNumArray = array.sort((a,b) => a-b)
+        return [newNumArray[0], newNumArray[newNumArray.length -1]]
+    }
 
 
 // --------------------3) Create a function that takes in two arrays as arguments and returns one array with no duplicate values. STRETCH: Use the spread operator to pass in a dynamic number of arguments.
@@ -52,6 +95,29 @@ var testArray1 = [3, 7, 10, 5, 4, 3, 3]
 var testArray2 = [7, 8, 2, 3, 1, 5, 4]
 // Expected output: [3, 7, 10, 5, 4, 8, 2, 1]
 
+//TEST:
+    //describes "singleArray"
+    //it takes two arrays and returns one array with no duplicate values
+    //expect testArray1, testArray2 --> [3, 7, 10, 5, 4, 8, 2, 1]
 
-
+describe("singleArray", () => {
+    it("takes two arrays and returns one array with no duplicate values", () => {
+        expect(singleArray(testArray1, testArray2)).toEqual([3, 7, 10, 5, 4, 8, 2, 1])
+    })
+})
 // b) Create the function that makes the test pass.
+//PROCESS:
+//Declare a function- singleArray
+    //Parameter- (array1, arrray2)
+    //declare a new variable named newArray and .concat both arrays
+    //return newArray.filter passing in value and index
+    //return newArray.indexof value === index
+    //Inputs & outputs: [3, 7, 10, 5, 4, 3, 3], [7, 8, 2, 3, 1, 5, 4] --> [3, 7, 10, 5, 4, 8, 2, 1]
+
+    const singleArray = (array1, array2) => {
+        let newArray = array1.concat(array2)
+        return newArray.filter((value, index) => {
+            return newArray.indexOf(value) === index;
+        })
+    }
+  
